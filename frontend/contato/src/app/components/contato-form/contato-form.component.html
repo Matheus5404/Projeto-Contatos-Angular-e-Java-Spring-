@@ -1,0 +1,164 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">
+            <i class="bi bi-person-plus"></i>
+            {{ isEdicao ? 'Editar Contato' : 'Novo Contato' }}
+          </h4>
+        </div>
+        <div class="card-body">
+          <!-- Alertas -->
+          <div *ngIf="erro" class="alert alert-danger alert-dismissible fade show">
+            {{ erro }}
+            <button type="button" class="btn-close" (click)="erro = ''"></button>
+          </div>
+
+          <div *ngIf="sucesso" class="alert alert-success">
+            {{ sucesso }}
+          </div>
+
+          <!-- Loading -->
+          <div *ngIf="loading && isEdicao" class="text-center my-4">
+            <div class="spinner-border text-primary"></div>
+            <p>Carregando...</p>
+          </div>
+
+          <!-- Formulário -->
+          <form [formGroup]="form" (ngSubmit)="salvar()" *ngIf="!loading || !isEdicao">
+            <div class="row">
+              <!-- Nome -->
+              <div class="col-md-6 mb-3">
+                <label for="nome" class="form-label">Nome *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nome"
+                  formControlName="nome"
+                  [class.is-invalid]="nome?.invalid && nome?.touched"
+                  placeholder="Digite o nome"
+                />
+                <div class="invalid-feedback" *ngIf="nome?.errors?.['required'] && nome?.touched">
+                  Nome é obrigatório.
+                </div>
+                <div class="invalid-feedback" *ngIf="nome?.errors?.['minlength'] && nome?.touched">
+                  Nome deve ter pelo menos 2 caracteres.
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="col-md-6 mb-3">
+                <label for="email" class="form-label">Email *</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  formControlName="email"
+                  [class.is-invalid]="email?.invalid && email?.touched"
+                  placeholder="Digite o email"
+                />
+                <div class="invalid-feedback" *ngIf="email?.errors?.['required'] && email?.touched">
+                  Email é obrigatório.
+                </div>
+                <div class="invalid-feedback" *ngIf="email?.errors?.['email'] && email?.touched">
+                  Email inválido.
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Telefone -->
+              <div class="col-md-6 mb-3">
+                <label for="telefone" class="form-label">Telefone *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="telefone"
+                  formControlName="telefone"
+                  [class.is-invalid]="telefone?.invalid && telefone?.touched"
+                  placeholder="(00) 00000-0000"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="telefone?.errors?.['required'] && telefone?.touched"
+                >
+                  Telefone é obrigatório.
+                </div>
+              </div>
+
+              <!-- Idade -->
+              <div class="col-md-6 mb-3">
+                <label for="idade" class="form-label">Idade *</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="idade"
+                  formControlName="idade"
+                  [class.is-invalid]="idade?.invalid && idade?.touched"
+                  placeholder="Digite a idade"
+                  min="0"
+                  max="150"
+                />
+                <div class="invalid-feedback" *ngIf="idade?.errors?.['required'] && idade?.touched">
+                  Idade é obrigatória.
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="(idade?.errors?.['min'] || idade?.errors?.['max']) && idade?.touched"
+                >
+                  Idade deve ser entre 0 e 150.
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Cidade -->
+              <div class="col-md-6 mb-3">
+                <label for="cidade" class="form-label">Cidade *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cidade"
+                  formControlName="cidade"
+                  [class.is-invalid]="cidade?.invalid && cidade?.touched"
+                  placeholder="Digite a cidade"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="cidade?.errors?.['required'] && cidade?.touched"
+                >
+                  Cidade é obrigatória.
+                </div>
+              </div>
+
+              <!-- Grupo/Família -->
+              <div class="col-md-6 mb-3">
+                <label for="familiaId" class="form-label">Grupo</label>
+                <select class="form-select" id="familiaId" formControlName="familiaId">
+                  <option [ngValue]="null">-- Selecione um grupo --</option>
+                  <option *ngFor="let familia of familias" [ngValue]="familia.id">
+                    {{ familia.nome }}
+                  </option>
+                </select>
+                <small class="text-muted">Opcional - Associe o contato a um grupo</small>
+              </div>
+            </div>
+
+            <!-- Botões -->
+            <div class="d-flex justify-content-end gap-2 mt-4">
+              <button type="button" class="btn btn-secondary" (click)="cancelar()">
+                <i class="bi bi-x-circle"></i> Cancelar
+              </button>
+              <button type="submit" class="btn btn-success" [disabled]="loading">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                <i class="bi bi-check-circle" *ngIf="!loading"></i>
+                {{ isEdicao ? 'Atualizar' : 'Salvar' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -65,7 +65,10 @@ public class ContatoService {
                 .orElseThrow(() -> new EntityNotFoundException("Contato não encontrado"));
 
         contato.setNome(request.nome());
+        contato.setEmail(request.email());
         contato.setTelefone(request.telefone());
+        contato.setIdade(request.idade());
+        contato.setCidade(request.cidade());
 
         if (request.familiaId() != null) {
             Familia familia = familiaRepository.findById(request.familiaId())
@@ -74,6 +77,8 @@ public class ContatoService {
         } else {
             contato.setFamilia(null);
         }
+        
+        repository.save(contato);
     }
 
     public List<ContatoResponse> getContatosByFamilia(long familiaId) {

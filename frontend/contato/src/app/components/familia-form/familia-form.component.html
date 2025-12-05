@@ -1,0 +1,73 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">
+            <i class="bi bi-folder-plus"></i>
+            {{ isEdicao ? 'Editar Grupo' : 'Novo Grupo' }}
+          </h4>
+        </div>
+        <div class="card-body">
+          <!-- Alertas -->
+          <div *ngIf="erro" class="alert alert-danger alert-dismissible fade show">
+            {{ erro }}
+            <button type="button" class="btn-close" (click)="erro = ''"></button>
+          </div>
+
+          <div *ngIf="sucesso" class="alert alert-success">
+            {{ sucesso }}
+          </div>
+
+          <!-- Loading -->
+          <div *ngIf="loading && isEdicao" class="text-center my-4">
+            <div class="spinner-border text-primary"></div>
+            <p>Carregando...</p>
+          </div>
+
+          <!-- Formulário -->
+          <form [formGroup]="form" (ngSubmit)="salvar()" *ngIf="!loading || !isEdicao">
+            <!-- Nome -->
+            <div class="mb-3">
+              <label for="nome" class="form-label">Nome do Grupo *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nome"
+                formControlName="nome"
+                [class.is-invalid]="nome?.invalid && nome?.touched"
+                placeholder="Ex: Família, Trabalho, Escola, Amigos..."
+              />
+              <div class="invalid-feedback" *ngIf="nome?.errors?.['required'] && nome?.touched">
+                Nome é obrigatório.
+              </div>
+              <div class="invalid-feedback" *ngIf="nome?.errors?.['minlength'] && nome?.touched">
+                Nome deve ter pelo menos 2 caracteres.
+              </div>
+            </div>
+
+            <!-- Exemplos de grupos -->
+            <div class="mb-4">
+              <small class="text-muted">
+                <strong>Exemplos de grupos:</strong> Família, Trabalho, Escola, Amigos, Academia,
+                Igreja, etc.
+              </small>
+            </div>
+
+            <!-- Botões -->
+            <div class="d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-secondary" (click)="cancelar()">
+                <i class="bi bi-x-circle"></i> Cancelar
+              </button>
+              <button type="submit" class="btn btn-success" [disabled]="loading">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                <i class="bi bi-check-circle" *ngIf="!loading"></i>
+                {{ isEdicao ? 'Atualizar' : 'Salvar' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
