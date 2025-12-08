@@ -1,32 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Familia } from '../../models/familia.model';
-import { FamiliaService } from '../../services/familia.service';
+import { finalize } from 'rxjs';
+import { Grupo } from '../../models/grupo.model';
+import { GrupoService } from '../../services/grupo.service';
 
 @Component({
-  selector: 'app-familia-lista',
+  selector: 'app-grupo-lista',
   standalone: false,
   templateUrl: './familia-lista.component.html',
   styleUrls: ['./familia-lista.component.css'],
 })
-export class FamiliaListaComponent implements OnInit {
-  familias: Familia[] = [];
+export class GrupoListaComponent implements OnInit {
+  grupos: Grupo[] = [];
   loading = false;
   erro = '';
+  sucesso = '';
 
-  constructor(private familiaService: FamiliaService, private router: Router) {}
+  constructor(private grupoService: GrupoService, private router: Router) {}
 
   ngOnInit(): void {
-    this.carregarFamilias();
+    this.carregarGrupos();
   }
 
-  carregarFamilias(): void {
+  carregarGrupos(): void {
     this.loading = true;
     this.erro = '';
 
-    this.familiaService.listar().subscribe({
+    this.grupoService.listar().subscribe({
       next: (data) => {
-        this.familias = data;
+        this.grupos = data;
         this.loading = false;
       },
       error: (err) => {
@@ -37,29 +39,40 @@ export class FamiliaListaComponent implements OnInit {
     });
   }
 
-  novaFamilia(): void {
+  novoGrupo(): void {
     this.router.navigate(['/grupos/novo']);
   }
 
-  editarFamilia(id: number): void {
+  editarGrupo(id: number): void {
     this.router.navigate(['/grupos', id, 'editar']);
   }
 
-  deletarFamilia(id: number): void {
+  deletarGrupo(id: number): void {
     if (
-      confirm(
+      !confirm(
         'Tem certeza que deseja excluir este grupo? Os contatos associados ficarão sem grupo.'
       )
     ) {
-      this.familiaService.deletar(id).subscribe({
+      return;
+    }
+
+    this.loading = true;
+    this.erro = '';
+    this.sucesso = '';
+
+    this.grupoService
+      .deletar(id)
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
         next: () => {
-          this.carregarFamilias();
+          this.grupos = this.grupos.filter((g) => g.id !== id);
+          this.sucesso = 'Grupo excluido com sucesso.';
+          this.erro = '';
         },
         error: (err) => {
           this.erro = 'Erro ao excluir grupo.';
           console.error('Erro:', err);
         },
       });
-    }
   }
 }

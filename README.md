@@ -1,120 +1,73 @@
 # Sistema de Gerenciamento de Contatos
 
-Sistema completo para gerenciamento de contatos pessoais, permitindo organizar contatos em grupos (famílias).
+Sistema completo para gerenciamento de contatos pessoais, organizados em grupos.
 
-## 📋 Funcionalidades
+## Funcionalidades
+- CRUD de contatos (nome, email, telefone, idade, cidade, grupo)
+- CRUD de grupos
+- Interface responsiva com Bootstrap 5
 
-- **CRUD de Contatos**: Criar, visualizar, editar e excluir contatos
-- **CRUD de Grupos**: Gerenciar grupos/famílias para organizar contatos
-- **6 Campos por Contato**: Nome, Email, Telefone, Idade, Cidade e Grupo
-- **Interface Responsiva**: Design moderno com Bootstrap 5
+## Tecnologias
+- Backend: Java 21, Spring Boot 3.5.4, Spring Data JPA, H2 em memória, Maven
+- Frontend: Angular 21, TypeScript, Bootstrap 5, RxJS
 
-## 🛠️ Tecnologias
-
-### Backend
-
-- **Java 21**
-- **Spring Boot 3.5.4**
-- **Spring Data JPA**
-- **H2 Database** (banco em memória)
-- **Maven**
-
-### Frontend
-
-- **Angular 21**
-- **TypeScript**
-- **Bootstrap 5**
-- **RxJS**
-
-## 📁 Estrutura do Projeto
-
+## Estrutura
 ```
-├── backend/                 # API REST Spring Boot
-│   ├── src/main/java/      # Código fonte Java
-│   └── pom.xml             # Dependências Maven
-│
-└── frontend/contato/       # Aplicação Angular
-    ├── src/app/            # Componentes e serviços
-    └── package.json        # Dependências npm
+backend/                 # API REST Spring Boot
+  src/main/java/         # Código fonte Java
+  pom.xml                # Dependências Maven
+frontend/contato/        # Aplicação Angular
+  src/app/               # Componentes e serviços
+  package.json           # Dependências npm
 ```
 
-## 🚀 Como Rodar Localmente
+## Como rodar
+Pré-requisitos: Java 21+, Node.js 18+, npm 9+
 
-### Pré-requisitos
-
-- Java 21+
-- Node.js 18+
-- npm 9+
-
-### Backend (porta 8080)
-
+Backend (porta 8080):
 ```bash
 cd backend
-chmod +x mvnw          # Apenas no Linux/macOS
-./mvnw spring-boot:run
+./mvnw spring-boot:run   # no Windows: mvnw.cmd spring-boot:run
 ```
 
-O backend estará disponível em: `http://localhost:8080`
-
-### Frontend (porta 4200)
-
+Frontend (porta 4200):
 ```bash
 cd frontend/contato
 npm install
 npm start
 ```
 
-O frontend estará disponível em: `http://localhost:4200`
+## Endpoints da API
+### Contatos (`/contatos`)
+- GET `/contatos` — listar
+- GET `/contatos/{id}` — buscar por id
+- POST `/contatos` — criar
+- PUT `/contatos/{id}` — atualizar
+- DELETE `/contatos/{id}` — excluir
+- GET `/contatos/grupo/{grupoId}` — listar por grupo
 
-## 📡 Endpoints da API
+### Grupos (`/grupos`)
+- GET `/grupos` — listar
+- GET `/grupos/{id}` — buscar por id
+- POST `/grupos` — criar
+- PUT `/grupos/{id}` — atualizar
+- DELETE `/grupos/{id}` — excluir
 
-### Contatos
-
-| Método | Endpoint        | Descrição                |
-| ------ | --------------- | ------------------------ |
-| GET    | `/contato`      | Listar todos os contatos |
-| GET    | `/contato/{id}` | Buscar contato por ID    |
-| POST   | `/contato`      | Criar novo contato       |
-| PUT    | `/contato/{id}` | Atualizar contato        |
-| DELETE | `/contato/{id}` | Excluir contato          |
-
-### Grupos/Famílias
-
-| Método | Endpoint        | Descrição              |
-| ------ | --------------- | ---------------------- |
-| GET    | `/familia`      | Listar todos os grupos |
-| GET    | `/familia/{id}` | Buscar grupo por ID    |
-| POST   | `/familia`      | Criar novo grupo       |
-| PUT    | `/familia/{id}` | Atualizar grupo        |
-| DELETE | `/familia/{id}` | Excluir grupo          |
-
-## 📝 Exemplo de Contato (JSON)
-
+### Exemplo de contato (JSON)
 ```json
 {
-  "nome": "João Silva",
+  "nome": "Joao Silva",
   "email": "joao@email.com",
   "telefone": "11999999999",
   "idade": "30",
-  "cidade": "São Paulo",
-  "familiaId": 1
+  "cidade": "Sao Paulo",
+  "grupoId": 1
 }
 ```
 
-## 🗃️ Banco de Dados
-
-O projeto utiliza **H2 Database** em memória. Os dados são reiniciados a cada restart do backend.
-
-Console H2: `http://localhost:8080/h2-console`
-
-- JDBC URL: `jdbc:h2:mem:contato`
-- Username: `sa`
-- Password: (vazio)
-
-## 👥 Autores
-
-Projeto desenvolvido para fins educacionais.
-
----
-
-**Data limite**: 09/12/2025
+## Banco de Dados
+- H2 em memória, reinicia a cada start do backend.
+- Console H2: `http://localhost:8080/h2-console`
+  - JDBC URL: `jdbc:h2:mem:contato`
+  - Username: `sa`
+  - Password: (vazio)

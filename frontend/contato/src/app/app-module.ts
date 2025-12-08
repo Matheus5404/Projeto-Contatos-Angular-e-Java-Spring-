@@ -16,17 +16,17 @@ import { App } from './app';
 import { ContatoListaComponent } from './components/contato-lista/contato-lista.component';
 import { ContatoFormComponent } from './components/contato-form/contato-form.component';
 
-// Componentes de Família/Grupo
-import { FamiliaListaComponent } from './components/familia-lista/familia-lista.component';
-import { FamiliaFormComponent } from './components/familia-form/familia-form.component';
+// Componentes de Grupo
+import { GrupoListaComponent } from './components/familia-lista/familia-lista.component';
+import { GrupoFormComponent } from './components/familia-form/familia-form.component';
 
 @NgModule({
   declarations: [
     App,
     ContatoListaComponent,
     ContatoFormComponent,
-    FamiliaListaComponent,
-    FamiliaFormComponent,
+    GrupoListaComponent,
+    GrupoFormComponent,
   ],
   imports: [
     BrowserModule,

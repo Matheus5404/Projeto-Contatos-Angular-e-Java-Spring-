@@ -16,52 +16,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.contato.usuario.dtos.FamiliaRequest;
-import com.contato.usuario.dtos.FamiliaResponse;
-import com.contato.usuario.services.FamiliaService;
+import com.contato.usuario.dtos.GrupoRequest;
+import com.contato.usuario.dtos.GrupoResponse;
+import com.contato.usuario.services.GrupoService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/familia")
+@RequestMapping("/grupos")
 @CrossOrigin
-public class FamiliaController {
+public class GrupoController {
     
     @Autowired
-    private FamiliaService service;
+    private GrupoService service;
     
     @GetMapping
-    public ResponseEntity<List<FamiliaResponse>> getAllFamilias() {
-        List<FamiliaResponse> familias = service.getAllFamilias();
-        return ResponseEntity.ok(familias);
+    public ResponseEntity<List<GrupoResponse>> getAllGrupos() {
+        List<GrupoResponse> grupos = service.getAllGrupos();
+        return ResponseEntity.ok(grupos);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FamiliaResponse> getFamiliaById(@PathVariable Long id) {
-        FamiliaResponse familia = service.getFamiliaById(id);
-        return ResponseEntity.ok(familia);
+    public ResponseEntity<GrupoResponse> getGrupoById(@PathVariable Long id) {
+        GrupoResponse grupo = service.getGrupoById(id);
+        return ResponseEntity.ok(grupo);
     }
 
     @PostMapping
-    public ResponseEntity<FamiliaResponse> createFamilia(@Valid @RequestBody FamiliaRequest request) {
-        FamiliaResponse familia = service.createFamilia(request);
+    public ResponseEntity<GrupoResponse> createGrupo(@Valid @RequestBody GrupoRequest request) {
+        GrupoResponse grupo = service.createGrupo(request);
         URI location = ServletUriComponentsBuilder
             .fromCurrentRequest()
             .path("/{id}")
-            .buildAndExpand(familia.id())
+            .buildAndExpand(grupo.id())
             .toUri();
-        return ResponseEntity.created(location).body(familia);
+        return ResponseEntity.created(location).body(grupo);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FamiliaResponse> updateFamilia(@PathVariable Long id, @Valid @RequestBody FamiliaRequest request) {
-        FamiliaResponse familia = service.updateFamilia(id, request);
-        return ResponseEntity.ok(familia);
+    public ResponseEntity<GrupoResponse> updateGrupo(@PathVariable Long id, @Valid @RequestBody GrupoRequest request) {
+        GrupoResponse grupo = service.updateGrupo(id, request);
+        return ResponseEntity.ok(grupo);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFamilia(@PathVariable Long id) {
-        service.deleteFamilia(id);
+    public ResponseEntity<Void> deleteGrupo(@PathVariable Long id) {
+        service.deleteGrupo(id);
         return ResponseEntity.noContent().build();
     }
 }

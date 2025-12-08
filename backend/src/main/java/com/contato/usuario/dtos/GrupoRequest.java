@@ -3,7 +3,7 @@ package com.contato.usuario.dtos;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record FamiliaRequest(
+public record GrupoRequest(
     @NotBlank(message = "Nome é obrigatório")
     @Size(min = 2, max = 100, message = "Nome deve ter entre 2 e 100 caracteres")
     String nome

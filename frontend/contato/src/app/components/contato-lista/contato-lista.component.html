@@ -11,6 +11,11 @@
     {{ erro }}
     <button type="button" class="btn-close" (click)="erro = ''"></button>
   </div>
+  <!-- Alerta de sucesso -->
+  <div *ngIf="sucesso" class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ sucesso }}
+    <button type="button" class="btn-close" (click)="sucesso = ''"></button>
+  </div>
 
   <!-- Loading -->
   <div *ngIf="loading" class="text-center my-5">
@@ -44,21 +49,25 @@
                 <p class="mt-2">Nenhum contato cadastrado.</p>
               </td>
             </tr>
+
             <tr *ngFor="let contato of contatos">
               <td>{{ contato.id }}</td>
-              <td>
-                <strong>{{ contato.nome }}</strong>
-              </td>
+              <td><strong>{{ contato.nome }}</strong></td>
               <td>{{ contato.email }}</td>
               <td>{{ contato.telefone }}</td>
               <td>{{ contato.idade }}</td>
               <td>{{ contato.cidade }}</td>
+
               <td>
-                <span *ngIf="contato.familia" class="badge bg-info">
-                  {{ contato.familia.nome }}
+                <span *ngIf="contato.grupo; else semGrupo" class="badge bg-info">
+                  {{ contato.grupo?.nome }}
                 </span>
-                <span *ngIf="!contato.familia" class="badge bg-secondary"> Sem grupo </span>
+
+                <ng-template #semGrupo>
+                  <span class="badge bg-secondary">Sem grupo</span>
+                </ng-template>
               </td>
+
               <td>
                 <button
                   class="btn btn-sm btn-warning btn-action"
@@ -67,6 +76,7 @@
                 >
                   <i class="bi bi-pencil"></i> Editar
                 </button>
+
                 <button
                   class="btn btn-sm btn-danger btn-action"
                   (click)="deletarContato(contato.id!)"
@@ -76,6 +86,7 @@
                 </button>
               </td>
             </tr>
+
           </tbody>
         </table>
       </div>

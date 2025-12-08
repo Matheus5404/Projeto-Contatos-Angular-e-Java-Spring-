@@ -132,13 +132,13 @@
                 </div>
               </div>
 
-              <!-- Grupo/Família -->
+              <!-- Grupo -->
               <div class="col-md-6 mb-3">
-                <label for="familiaId" class="form-label">Grupo</label>
-                <select class="form-select" id="familiaId" formControlName="familiaId">
+                <label for="grupoId" class="form-label">Grupo</label>
+                <select class="form-select" id="grupoId" formControlName="grupoId">
                   <option [ngValue]="null">-- Selecione um grupo --</option>
-                  <option *ngFor="let familia of familias" [ngValue]="familia.id">
-                    {{ familia.nome }}
+                  <option *ngFor="let grupo of grupos" [ngValue]="grupo.id">
+                    {{ grupo.nome }}
                   </option>
                 </select>
                 <small class="text-muted">Opcional - Associe o contato a um grupo</small>

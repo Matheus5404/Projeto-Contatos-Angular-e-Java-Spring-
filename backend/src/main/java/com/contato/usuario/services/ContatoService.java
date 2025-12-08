@@ -1,8 +1,6 @@
 package com.contato.usuario.services;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,10 +8,10 @@ import org.springframework.stereotype.Service;
 import com.contato.usuario.dtos.ContatoRequest;
 import com.contato.usuario.dtos.ContatoResponse;
 import com.contato.usuario.entities.Contato;
-import com.contato.usuario.entities.Familia;
+import com.contato.usuario.entities.Grupo;
 import com.contato.usuario.mappers.ContatoMapper;
 import com.contato.usuario.repositories.ContatoRepository;
-import com.contato.usuario.repositories.FamiliaRepository;
+import com.contato.usuario.repositories.GrupoRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -24,7 +22,7 @@ public class ContatoService {
     private ContatoRepository repository;
 
     @Autowired
-    private FamiliaRepository familiaRepository;
+    private GrupoRepository grupoRepository;
 
     public List<ContatoResponse> getContatos() {
         return repository.findAll()
@@ -50,10 +48,10 @@ public class ContatoService {
     public ContatoResponse saveContato(ContatoRequest request) {
         Contato contato = ContatoMapper.toEntity(request);
 
-        if (request.familiaId() != null) {
-            Familia familia = familiaRepository.findById(request.familiaId())
-                .orElseThrow(() -> new EntityNotFoundException("Grupo Familia não encontrada"));
-            contato.setFamilia(familia);
+        if (request.grupoId() != null) {
+            Grupo grupo = grupoRepository.findById(request.grupoId())
+                .orElseThrow(() -> new EntityNotFoundException("Grupo não encontrado"));
+            contato.setGrupo(grupo);
         }
         
         Contato savedContato = repository.save(contato);
@@ -70,19 +68,19 @@ public class ContatoService {
         contato.setIdade(request.idade());
         contato.setCidade(request.cidade());
 
-        if (request.familiaId() != null) {
-            Familia familia = familiaRepository.findById(request.familiaId())
-                .orElseThrow(() -> new EntityNotFoundException("Grupo Familia não encontrada")); 
-            contato.setFamilia(familia);
+        if (request.grupoId() != null) {
+            Grupo grupo = grupoRepository.findById(request.grupoId())
+                .orElseThrow(() -> new EntityNotFoundException("Grupo não encontrado")); 
+            contato.setGrupo(grupo);
         } else {
-            contato.setFamilia(null);
+            contato.setGrupo(null);
         }
         
         repository.save(contato);
     }
 
-    public List<ContatoResponse> getContatosByFamilia(long familiaId) {
-        return repository.findByFamiliaId(familiaId)
+    public List<ContatoResponse> getContatosByGrupo(long grupoId) {
+        return repository.findByGrupoId(grupoId)
                 .stream()
                 .map(ContatoMapper::toDTO)
                 .toList();

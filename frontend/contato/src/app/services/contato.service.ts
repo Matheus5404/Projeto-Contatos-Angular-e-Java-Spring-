@@ -7,7 +7,7 @@ import { Contato, ContatoRequest } from '../models/contato.model';
   providedIn: 'root',
 })
 export class ContatoService {
-  private apiUrl = 'http://localhost:8080/contato';
+  private apiUrl = 'http://localhost:8080/contatos';
 
   constructor(private http: HttpClient) {}
 
@@ -19,8 +19,8 @@ export class ContatoService {
     return this.http.get<Contato>(`${this.apiUrl}/${id}`);
   }
 
-  buscarPorFamilia(familiaId: number): Observable<Contato[]> {
-    return this.http.get<Contato[]>(`${this.apiUrl}/familia/${familiaId}`);
+  buscarPorGrupo(grupoId: number): Observable<Contato[]> {
+    return this.http.get<Contato[]>(`${this.apiUrl}/grupo/${grupoId}`);
   }
 
   criar(contato: ContatoRequest): Observable<Contato> {

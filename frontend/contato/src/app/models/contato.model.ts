@@ -1,4 +1,4 @@
-import { Familia } from './familia.model';
+import { Grupo } from './grupo.model';
 
 export interface Contato {
   id?: number;
@@ -7,7 +7,7 @@ export interface Contato {
   telefone: string;
   idade: string;
   cidade: string;
-  familia?: Familia;
+  grupo?: Grupo;
 }
 
 export interface ContatoRequest {
@@ -16,5 +16,5 @@ export interface ContatoRequest {
   telefone: string;
   idade: string;
   cidade: string;
-  familiaId?: number | null;
+  grupoId?: number | null;
 }

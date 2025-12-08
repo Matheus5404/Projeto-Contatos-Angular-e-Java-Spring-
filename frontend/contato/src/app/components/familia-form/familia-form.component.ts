@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FamiliaService } from '../../services/familia.service';
-import { FamiliaRequest } from '../../models/familia.model';
+import { GrupoService } from '../../services/grupo.service';
+import { GrupoRequest } from '../../models/grupo.model';
 
 @Component({
-  selector: 'app-familia-form',
+  selector: 'app-grupo-form',
   standalone: false,
   templateUrl: './familia-form.component.html',
   styleUrls: ['./familia-form.component.css'],
 })
-export class FamiliaFormComponent implements OnInit {
+export class GrupoFormComponent implements OnInit {
   form!: FormGroup;
   isEdicao = false;
-  familiaId?: number;
+  grupoId?: number;
   loading = false;
   erro = '';
   sucesso = '';
 
   constructor(
     private fb: FormBuilder,
-    private familiaService: FamiliaService,
+    private grupoService: GrupoService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -32,8 +32,8 @@ export class FamiliaFormComponent implements OnInit {
     const id = this.route.snapshot.params['id'];
     if (id) {
       this.isEdicao = true;
-      this.familiaId = +id;
-      this.carregarFamilia();
+      this.grupoId = +id;
+      this.carregarGrupo();
     }
   }
 
@@ -43,12 +43,12 @@ export class FamiliaFormComponent implements OnInit {
     });
   }
 
-  carregarFamilia(): void {
+  carregarGrupo(): void {
     this.loading = true;
-    this.familiaService.buscarPorId(this.familiaId!).subscribe({
-      next: (familia) => {
+    this.grupoService.buscarPorId(this.grupoId!).subscribe({
+      next: (grupo) => {
         this.form.patchValue({
-          nome: familia.nome,
+          nome: grupo.nome,
         });
         this.loading = false;
       },
@@ -70,12 +70,12 @@ export class FamiliaFormComponent implements OnInit {
     this.erro = '';
     this.sucesso = '';
 
-    const familia: FamiliaRequest = {
+    const grupo: GrupoRequest = {
       nome: this.form.value.nome,
     };
 
     if (this.isEdicao) {
-      this.familiaService.atualizar(this.familiaId!, familia).subscribe({
+      this.grupoService.atualizar(this.grupoId!, grupo).subscribe({
         next: () => {
           this.sucesso = 'Grupo atualizado com sucesso!';
           this.loading = false;
@@ -88,7 +88,7 @@ export class FamiliaFormComponent implements OnInit {
         },
       });
     } else {
-      this.familiaService.criar(familia).subscribe({
+      this.grupoService.criar(grupo).subscribe({
         next: () => {
           this.sucesso = 'Grupo criado com sucesso!';
           this.loading = false;

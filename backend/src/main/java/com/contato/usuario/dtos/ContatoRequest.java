@@ -24,5 +24,5 @@ public record ContatoRequest(
     @Size(min = 3, max = 100, message = "Cidade tem que ser de 3 até 100 caracteres")
     String cidade,
 
-    Long familiaId
+    Long grupoId
 ) {}

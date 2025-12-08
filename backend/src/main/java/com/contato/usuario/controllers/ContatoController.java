@@ -18,13 +18,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.contato.usuario.dtos.ContatoRequest;
 import com.contato.usuario.dtos.ContatoResponse;
-import com.contato.usuario.dtos.FamiliaResponse;
 import com.contato.usuario.services.ContatoService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("contato")
+@RequestMapping("contatos")
 @CrossOrigin
 public class ContatoController {
 
@@ -68,9 +67,9 @@ public class ContatoController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("familia/{familiaId}")
-    public ResponseEntity<List<ContatoResponse>> getContatosByFamilia(@PathVariable long familiaId) {
-        return ResponseEntity.ok(service.getContatosByFamilia(familiaId));
+    @GetMapping("grupo/{grupoId}")
+    public ResponseEntity<List<ContatoResponse>> getContatosByGrupo(@PathVariable long grupoId) {
+        return ResponseEntity.ok(service.getContatosByGrupo(grupoId));
     }
 
 }   

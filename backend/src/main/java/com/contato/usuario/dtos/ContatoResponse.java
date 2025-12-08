@@ -7,5 +7,5 @@ public record ContatoResponse(
     String telefone,
     String idade,
     String cidade,
-    FamiliaResponse familia
+    GrupoResponse grupo
 ) {}

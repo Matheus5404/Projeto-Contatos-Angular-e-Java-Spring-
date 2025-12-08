@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContatoService } from '../../services/contato.service';
-import { FamiliaService } from '../../services/familia.service';
-import { Familia } from '../../models/familia.model';
+import { GrupoService } from '../../services/grupo.service';
+import { Grupo } from '../../models/grupo.model';
 import { ContatoRequest } from '../../models/contato.model';
 
 @Component({
@@ -14,7 +14,7 @@ import { ContatoRequest } from '../../models/contato.model';
 })
 export class ContatoFormComponent implements OnInit {
   form!: FormGroup;
-  familias: Familia[] = [];
+  grupos: Grupo[] = [];
   isEdicao = false;
   contatoId?: number;
   loading = false;
@@ -24,14 +24,14 @@ export class ContatoFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private contatoService: ContatoService,
-    private familiaService: FamiliaService,
+    private grupoService: GrupoService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.inicializarForm();
-    this.carregarFamilias();
+    this.carregarGrupos();
 
     // Verificar se é edição
     const id = this.route.snapshot.params['id'];
@@ -49,17 +49,17 @@ export class ContatoFormComponent implements OnInit {
       telefone: ['', [Validators.required]],
       idade: ['', [Validators.required, Validators.min(0), Validators.max(150)]],
       cidade: ['', [Validators.required]],
-      familiaId: [null],
+      grupoId: [null],
     });
   }
 
-  carregarFamilias(): void {
-    this.familiaService.listar().subscribe({
+  carregarGrupos(): void {
+    this.grupoService.listar().subscribe({
       next: (data) => {
-        this.familias = data;
+        this.grupos = data;
       },
       error: (err) => {
-        console.error('Erro ao carregar famílias:', err);
+        console.error('Erro ao carregar grupos:', err);
       },
     });
   }
@@ -74,7 +74,7 @@ export class ContatoFormComponent implements OnInit {
           telefone: contato.telefone,
           idade: contato.idade,
           cidade: contato.cidade,
-          familiaId: contato.familia?.id || null,
+          grupoId: contato.grupo?.id || null,
         });
         this.loading = false;
       },
@@ -102,7 +102,7 @@ export class ContatoFormComponent implements OnInit {
       telefone: this.form.value.telefone,
       idade: String(this.form.value.idade),
       cidade: this.form.value.cidade,
-      familiaId: this.form.value.familiaId || null,
+      grupoId: this.form.value.grupoId || null,
     };
 
     if (this.isEdicao) {

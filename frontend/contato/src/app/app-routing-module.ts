@@ -5,9 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContatoListaComponent } from './components/contato-lista/contato-lista.component';
 import { ContatoFormComponent } from './components/contato-form/contato-form.component';
 
-// Componentes de Família/Grupo
-import { FamiliaListaComponent } from './components/familia-lista/familia-lista.component';
-import { FamiliaFormComponent } from './components/familia-form/familia-form.component';
+// Componentes de Grupo
+import { GrupoListaComponent } from './components/familia-lista/familia-lista.component';
+import { GrupoFormComponent } from './components/familia-form/familia-form.component';
 
 const routes: Routes = [
   // Rota padrão - redireciona para contatos
@@ -18,10 +18,10 @@ const routes: Routes = [
   { path: 'contatos/novo', component: ContatoFormComponent },
   { path: 'contatos/:id/editar', component: ContatoFormComponent },
 
-  // Rotas de Grupos/Famílias
-  { path: 'grupos', component: FamiliaListaComponent },
-  { path: 'grupos/novo', component: FamiliaFormComponent },
-  { path: 'grupos/:id/editar', component: FamiliaFormComponent },
+  // Rotas de Grupos
+  { path: 'grupos', component: GrupoListaComponent },
+  { path: 'grupos/novo', component: GrupoFormComponent },
+  { path: 'grupos/:id/editar', component: GrupoFormComponent },
 
   // Rota curinga - redireciona para contatos
   { path: '**', redirectTo: '/contatos' },

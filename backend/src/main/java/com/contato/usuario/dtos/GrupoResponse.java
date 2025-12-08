@@ -1,6 +1,6 @@
 package com.contato.usuario.dtos;
 
-public record FamiliaResponse(
+public record GrupoResponse(
     Long id,
     String nome
 )

@@ -13,8 +13,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "TBL_FAMILIA")
-public class Familia implements Serializable {
+@Table(name = "TBL_GRUPO")
+public class Grupo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -22,12 +22,12 @@ public class Familia implements Serializable {
     private Long id;
     private String nome;
 
-    @OneToMany(mappedBy = "familia")
+    @OneToMany(mappedBy = "grupo")
     private List<Contato> contatos = new ArrayList<>();
 
-    public Familia() {}
+    public Grupo() {}
 
-    public Familia(Long id, String nome) {
+    public Grupo(Long id, String nome) {
         this.id = id;
         this.nome = nome;
     }
@@ -74,7 +74,7 @@ public class Familia implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Familia other = (Familia) obj;
+        final Grupo other = (Grupo) obj;
         return Objects.equals(this.id, other.id);
     }
 

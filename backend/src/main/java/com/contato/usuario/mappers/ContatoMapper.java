@@ -3,6 +3,7 @@ package com.contato.usuario.mappers;
 import com.contato.usuario.dtos.ContatoRequest;
 import com.contato.usuario.dtos.ContatoResponse;
 import com.contato.usuario.entities.Contato;
+import com.contato.usuario.mappers.GrupoMapper;
 
 public class ContatoMapper {
     
@@ -24,7 +25,7 @@ public class ContatoMapper {
             contato.getTelefone(),
             contato.getIdade(),
             contato.getCidade(),
-            contato.getFamilia() != null ? FamiliaMapper.toResponse(contato.getFamilia()) : null
+            contato.getGrupo() != null ? GrupoMapper.toResponse(contato.getGrupo()) : null
         );
     }
 }

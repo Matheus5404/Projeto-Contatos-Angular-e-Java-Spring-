@@ -3,6 +3,7 @@ package com.contato.usuario.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.contato.usuario.entities.Grupo;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,8 +26,8 @@ public class Contato implements Serializable {
     private String cidade;
 
     @ManyToOne
-    @JoinColumn(name = "familia_id")
-    private Familia familia;
+    @JoinColumn(name = "grupo_id")
+    private Grupo grupo;
 
     public Contato() {
         
@@ -41,14 +42,14 @@ public class Contato implements Serializable {
         this.cidade = cidade;
     }
 
-    public Contato(Long id, String nome, String email, String telefone, String idade, String cidade, Familia familia) {
+    public Contato(Long id, String nome, String email, String telefone, String idade, String cidade, Grupo grupo) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.idade = idade;
         this.cidade = cidade;
-        this.familia = familia;
+        this.grupo = grupo;
     }
 
     public Long getId() {
@@ -99,12 +100,12 @@ public class Contato implements Serializable {
         this.cidade = cidade;
     }
 
-    public Familia getFamilia() {
-        return familia;
+    public Grupo getGrupo() {
+        return grupo;
     }
 
-    public void setFamilia(Familia familia) {
-        this.familia = familia;
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
     @Override
