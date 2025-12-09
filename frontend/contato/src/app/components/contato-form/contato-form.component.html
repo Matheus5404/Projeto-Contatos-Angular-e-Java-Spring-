@@ -2,11 +2,14 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header bg-primary text-white">
-          <h4 class="mb-0">
-            <i class="bi bi-person-plus"></i>
-            {{ isEdicao ? 'Editar Contato' : 'Novo Contato' }}
-          </h4>
+        <div class="card-header accent-header">
+          <div class="d-flex align-items-center">
+            <div class="brand-accent me-2"><i class="bi bi-person-plus"></i></div>
+            <div>
+              <h4 class="mb-0">{{ isEdicao ? 'Editar Contato' : 'Novo Contato' }}</h4>
+              <small class="muted-text">Preencha os dados para manter tudo organizado</small>
+            </div>
+          </div>
         </div>
         <div class="card-body">
           <!-- Alertas -->
@@ -147,10 +150,10 @@
 
             <!-- Botões -->
             <div class="d-flex justify-content-end gap-2 mt-4">
-              <button type="button" class="btn btn-secondary" (click)="cancelar()">
+              <button type="button" class="btn btn-soft-secondary btn-rounded" (click)="cancelar()">
                 <i class="bi bi-x-circle"></i> Cancelar
               </button>
-              <button type="submit" class="btn btn-success" [disabled]="loading">
+              <button type="submit" class="btn btn-gradient btn-rounded" [disabled]="loading">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
                 <i class="bi bi-check-circle" *ngIf="!loading"></i>
                 {{ isEdicao ? 'Atualizar' : 'Salvar' }}

@@ -1,22 +1,23 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container">
-    <a class="navbar-brand" routerLink="/">
-      <i class="bi bi-person-lines-fill"></i> Sistema de Contatos
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+  <div class="container py-2">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/">
+      <span class="brand-accent me-2"><i class="bi bi-person-lines-fill"></i></span>
+      <span>Sistema de Contatos</span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/contatos" routerLinkActive="active">
-            <i class="bi bi-people"></i> Contatos
+          <a class="nav-link d-flex align-items-center" routerLink="/contatos" routerLinkActive="active">
+            <i class="bi bi-people me-1"></i> Contatos
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/grupos" routerLinkActive="active">
-            <i class="bi bi-collection"></i> Grupos
+          <a class="nav-link d-flex align-items-center" routerLink="/grupos" routerLinkActive="active">
+            <i class="bi bi-collection me-1"></i> Grupos
           </a>
         </li>
       </ul>
@@ -30,8 +31,9 @@
 </main>
 
 <!-- Footer -->
-<footer class="bg-light text-center text-muted py-3 mt-5">
+<footer class="text-center text-muted py-4 mt-5">
   <div class="container">
-    <small>Sistema de Gerenciamento de Contatos © 2025</small>
+    <small class="d-block">Sistema de Gerenciamento de Contatos © 2025</small>
+    <small class="text-white-50">Interface repaginada com nova paleta e botões estilizados</small>
   </div>
 </footer>
